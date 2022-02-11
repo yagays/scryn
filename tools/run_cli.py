@@ -11,20 +11,20 @@ num_annotate = 1000
 for i in range(num_annotate):
     task = scryn.get_task(worker)
     try:
-        answer = input(task.text + ": ")
+        answer = input(f"{worker.name}:{task.text}: ")
         scryn.annotate(task, answer, worker=worker)
-        print(answer)
     except KeyboardInterrupt:
+        print()
         break
 
 worker2 = Worker(name="ays")
 for i in range(num_annotate):
     task = scryn.get_task(worker2)
     try:
-        answer = input(task.text + ": ")
+        answer = input(f"{worker2.name}:{task.text}: ")
         scryn.annotate(task, answer, worker=worker2)
-        print(answer)
     except KeyboardInterrupt:
+        print()
         break
 
 print()

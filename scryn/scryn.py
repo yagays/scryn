@@ -14,12 +14,7 @@ class Scryn:
 
     def get_task(self, worker: Worker) -> Task:
         if worker not in self.worker2annotation:
-            # initialize worker's Annotation
-            self.worker2annotation[worker] = Annotation(worker_name=worker)
-
-            # initialize and ranking Assignment's tasks
-            assign_task = self.strategy.ranking(self.tasks)
-            self.worker2assignment[worker] = Assignment(tasks=assign_task)
+            self._initialize_worker(worker)
 
         next_task = next(self.worker2assignment[worker])
 
@@ -30,3 +25,11 @@ class Scryn:
 
     def show_annotation(self, worker: Worker) -> None:
         print(self.worker2annotation[worker])
+
+    def _initialize_worker(self, worker: Worker):
+        # initialize worker's Annotation
+        self.worker2annotation[worker] = Annotation(worker_name=worker)
+
+        # initialize and ranking Assignment's tasks
+        assign_task = self.strategy.ranking(self.tasks)
+        self.worker2assignment[worker] = Assignment(tasks=assign_task)
