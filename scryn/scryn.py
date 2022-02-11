@@ -1,4 +1,4 @@
-from typing import Dict, List, Set
+from typing import Dict, List, Optional, Set
 
 from scryn.model import Annotation, Answer, Assignment, Task, Worker
 from scryn.strategy import BaseStrategy, VanillaStrategy
@@ -13,14 +13,14 @@ class Scryn:
         self.worker2assignment: Dict[Worker, Assignment] = {}
         self.worker2annotation: Dict[Worker, Annotation] = {}
 
-    def get_task(self, worker: Worker) -> Task:
+    def get_task(self, worker: Worker) -> Optional[Task]:
         if worker not in self.workers:
             self._initialize_worker(worker)
 
         next_task = next(self.worker2assignment[worker])
 
         # update step
-        if self._is_update_step(worker):
+        if next_task and self._is_update_step(worker):
             self._update_assignment(worker)
 
         return next_task

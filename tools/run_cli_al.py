@@ -17,10 +17,13 @@ scryn = Scryn(tasks=tasks, strategy=ActiveLearningStrategy(ml_model=MLPredictor(
 num_annotate = 1000
 
 for i in range(num_annotate):
-    task = scryn.get_task(worker)
     try:
-        answer = input(f"{worker.name}:{task.text}: ")
-        scryn.annotate(task, answer, worker=worker)
+        task = scryn.get_task(worker)
+        if task:
+            answer = input(f"{worker.name}:{task.text}: ")
+            scryn.annotate(task, answer, worker=worker)
+        else:
+            break
     except KeyboardInterrupt:
         print()
         break

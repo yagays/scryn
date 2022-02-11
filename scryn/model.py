@@ -1,6 +1,6 @@
 import uuid
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Optional
 
 
 @dataclass(frozen=True)
@@ -39,9 +39,9 @@ class Assignment:
     def __iter__(self):
         return self
 
-    def __next__(self):
+    def __next__(self) -> Optional[Task]:
         if self.i == len(self.tasks):
-            raise StopIteration()
+            return None
         value = self.tasks[self.i]
         self.i += 1
         return value
