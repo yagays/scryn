@@ -9,20 +9,28 @@ scryn = Scryn(tasks=tasks)
 num_annotate = 1000
 
 for i in range(num_annotate):
-    task = scryn.get_task(worker)
+
     try:
-        answer = input(f"{worker.name}:{task.text}: ")
-        scryn.annotate(task, answer, worker=worker)
+        task = scryn.get_task(worker)
+        if task:
+            answer = input(f"{worker.name}:{task.text}: ")
+            scryn.annotate(task, answer, worker=worker)
+        else:
+            break
     except KeyboardInterrupt:
         print()
         break
 
 worker2 = Worker(name="ays")
 for i in range(num_annotate):
-    task = scryn.get_task(worker2)
+
     try:
-        answer = input(f"{worker2.name}:{task.text}: ")
-        scryn.annotate(task, answer, worker=worker2)
+        task = scryn.get_task(worker2)
+        if task:
+            answer = input(f"{worker2.name}:{task.text}: ")
+            scryn.annotate(task, answer, worker=worker2)
+        else:
+            break
     except KeyboardInterrupt:
         print()
         break
