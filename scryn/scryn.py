@@ -8,12 +8,13 @@ class Scryn:
     def __init__(self, tasks: List[Task], strategy: BaseStrategy = VanillaStrategy()) -> None:
         self.tasks = tasks
         self.strategy = strategy
+        self.workers = set()
 
         self.worker2assignment: Dict[Worker, Assignment] = {}
         self.worker2annotation: Dict[Worker, Annotation] = {}
 
     def get_task(self, worker: Worker) -> Task:
-        if worker not in self.worker2annotation:
+        if worker not in self.workers:
             self._initialize_worker(worker)
 
         next_task = next(self.worker2assignment[worker])
@@ -27,6 +28,8 @@ class Scryn:
         print(self.worker2annotation[worker])
 
     def _initialize_worker(self, worker: Worker):
+        self.workers.add(worker)
+
         # initialize worker's Annotation
         self.worker2annotation[worker] = Annotation(worker_name=worker)
 
