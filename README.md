@@ -1,2 +1,2 @@
-# Scry
-Annotation tools with active learning.
+# Scryn
+Annotation tool with active learning.
