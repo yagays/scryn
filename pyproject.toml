@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "scryn"
+version = "0.1.0"
+description = ""
+authors = ["Yuki Okuda <y.okuda@dr-ubie.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.73.0"
+pydantic = "^1.9.0"
+
+[tool.poetry.dev-dependencies]
+ipython = "^8.0.1"
+ipdb = "^0.13.9"
+flake8 = "^4.0.1"
+black = "^22.1.0"
+isort = "^5.10.1"
+pytest = "^7.0.0"
+tox = "^3.24.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
