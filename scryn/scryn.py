@@ -25,7 +25,7 @@ class Scryn:
 
         return next_task
 
-    def annotate(self, task: Task, annotation: str, worker: Worker) -> None:
+    def annotate(self, annotation: str, task: Task, worker: Worker) -> None:
         self.worker2annotation[worker].answers.append(Answer(task_id=task.task_id, answer=annotation))
 
     def show_annotation(self, worker: Worker) -> None:
@@ -35,7 +35,7 @@ class Scryn:
         self.workers.add(worker)
 
         # initialize worker's Annotation
-        self.worker2annotation[worker] = Annotation(worker_name=worker)
+        self.worker2annotation[worker] = Annotation(worker_name=worker.name)
 
         # initialize and ranking Assignment's tasks
         assign_task = self.strategy.ranking(self.tasks)
