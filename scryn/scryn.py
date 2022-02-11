@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Set
 
 from scryn.model import Annotation, Answer, Assignment, Task, Worker
 from scryn.strategy import BaseStrategy, VanillaStrategy
@@ -8,7 +8,7 @@ class Scryn:
     def __init__(self, tasks: List[Task], strategy: BaseStrategy = VanillaStrategy()) -> None:
         self.tasks = tasks
         self.strategy = strategy
-        self.workers = set()
+        self.workers: Set[Worker] = set()
 
         self.worker2assignment: Dict[Worker, Assignment] = {}
         self.worker2annotation: Dict[Worker, Annotation] = {}

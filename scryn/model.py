@@ -6,7 +6,7 @@ from typing import List
 @dataclass(frozen=True)
 class Worker:
     name: str
-    id: str = field(default_factory=uuid.uuid4)
+    id: uuid.UUID = field(default_factory=uuid.uuid4)
 
 
 @dataclass
