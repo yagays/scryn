@@ -18,5 +18,16 @@ for i in range(num_annotate):
     except KeyboardInterrupt:
         break
 
+worker2 = "ays"
+for i in range(num_annotate):
+    task = scryn.get_task(worker2)
+    try:
+        answer = input(task.text + ": ")
+        scryn.annotate(task, answer, worker=worker2)
+        print(answer)
+    except KeyboardInterrupt:
+        break
+
 print()
 scryn.show_annotation(worker=worker)
+scryn.show_annotation(worker=worker2)
