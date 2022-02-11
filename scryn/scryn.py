@@ -42,6 +42,9 @@ class Scryn:
         self.worker2assignment[worker] = Assignment(tasks=assign_task)
 
     def _is_update_step(self, worker):
+        if self.strategy.update_step == -1:
+            return False
+
         current_steps = self.worker2annotation[worker].num_answers
         if current_steps % self.strategy.update_step == 0:
             return True

@@ -6,6 +6,9 @@ from scryn.model import Task
 
 
 class BaseStrategy(ABC):
+    def __init__(self, update_step: int = -1) -> None:
+        self.update_step = update_step
+
     @abstractmethod
     def ranking(self, tasks: List[Task]) -> List[Task]:
         pass
