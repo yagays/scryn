@@ -1,5 +1,4 @@
-from scryn.scryn import Scryn
-from scryn.task import Task
+from scryn.scryn import Scryn, Task
 
 tasks = [Task(task_id=i, text=f"text_{i}") for i in range(1000)]
 task_category = "TextClassification"

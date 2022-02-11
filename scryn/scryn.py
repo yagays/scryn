@@ -2,7 +2,11 @@ from ast import AnnAssign
 from typing import List, Dict
 from dataclasses import dataclass, field
 
-from scryn.task import Task
+
+@dataclass
+class Task:
+    task_id: str
+    text: str
 
 
 @dataclass
