@@ -1,4 +1,5 @@
 import uuid
+import random
 from typing import List, Dict
 from dataclasses import dataclass, field
 
@@ -43,9 +44,28 @@ class Assignment:
         return value
 
 
+class Strategy:
+    def __init__(self) -> None:
+        pass
+
+    def ranking(self, tasks: List[Task]) -> List[Task]:
+        return tasks
+
+
+class RandomStrategy:
+    def __init__(self) -> None:
+        pass
+
+    def ranking(self, tasks: List[Task]) -> List[Task]:
+        random.shuffle(tasks)
+        return tasks
+
+
 class Scryn:
-    def __init__(self, tasks: List[Task]) -> None:
+    def __init__(self, tasks: List[Task], strategy: Strategy = Strategy()) -> None:
         self.tasks = tasks
+        self.strategy = strategy
+
         self.worker2assignment: Dict[Worker, Assignment] = {}
         self.worker2annotation: Dict[Worker, Annotation] = {}
 
@@ -53,7 +73,10 @@ class Scryn:
         if worker not in self.worker2annotation:
             # initialize worker's Annotation
             self.worker2annotation[worker] = Annotation(worker_name=worker)
-            self.worker2assignment[worker] = Assignment(tasks=self.tasks)
+
+            # initialize and ranking Assignment's tasks
+            assign_task = self.strategy.ranking(self.tasks)
+            self.worker2assignment[worker] = Assignment(tasks=assign_task)
 
         next_task = next(self.worker2assignment[worker])
 
