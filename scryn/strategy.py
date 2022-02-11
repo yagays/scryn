@@ -23,8 +23,9 @@ class RandomOrderStrategy(BaseStrategy):
 
 
 class ActiveLearningStrategy(BaseStrategy):
-    def __init__(self, ml_model) -> None:
+    def __init__(self, ml_model, update_step: int) -> None:
         self.ml_model = ml_model
+        self.update_step = update_step
 
     def ranking(self, tasks: List[Task]) -> List[Task]:
         tasks_with_confidence = [(t, self.ml_model.predict(t.text)) for t in tasks]

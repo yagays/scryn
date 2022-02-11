@@ -1,3 +1,5 @@
+from turtle import update
+
 from scryn.scryn import Scryn, Task, Worker
 from scryn.strategy import ActiveLearningStrategy
 
@@ -11,7 +13,7 @@ class MLPredictor:
 tasks = [Task(task_id=i, text=f"text_{i}") for i in range(1000)]
 worker = Worker(name="yag")
 
-scryn = Scryn(tasks=tasks, strategy=ActiveLearningStrategy(ml_model=MLPredictor()))
+scryn = Scryn(tasks=tasks, strategy=ActiveLearningStrategy(ml_model=MLPredictor(), update_step=3))
 num_annotate = 1000
 
 for i in range(num_annotate):

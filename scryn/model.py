@@ -26,6 +26,10 @@ class Annotation:
     worker_name: str
     answers: List[Answer] = field(default_factory=list)
 
+    @property
+    def num_answers(self):
+        return len(self.answers)
+
 
 class Assignment:
     def __init__(self, tasks: List[Task]) -> None:
@@ -41,3 +45,6 @@ class Assignment:
         value = self.tasks[self.i]
         self.i += 1
         return value
+
+    def dump_remain_tasks(self):
+        return self.tasks[self.i :]

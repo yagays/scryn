@@ -19,6 +19,10 @@ class Scryn:
 
         next_task = next(self.worker2assignment[worker])
 
+        # update step
+        if self._is_update_step(worker):
+            self._update_assignment(worker)
+
         return next_task
 
     def annotate(self, task: Task, annotation: str, worker: Worker) -> None:
@@ -35,4 +39,17 @@ class Scryn:
 
         # initialize and ranking Assignment's tasks
         assign_task = self.strategy.ranking(self.tasks)
+        self.worker2assignment[worker] = Assignment(tasks=assign_task)
+
+    def _is_update_step(self, worker):
+        current_steps = self.worker2annotation[worker].num_answers
+        if current_steps % self.strategy.update_step == 0:
+            return True
+        else:
+            return False
+
+    def _update_assignment(self, worker):
+        remain_tasks = self.worker2assignment[worker].dump_remain_tasks()
+        assign_task = self.strategy.ranking(remain_tasks)
+        print(len(remain_tasks))
         self.worker2assignment[worker] = Assignment(tasks=assign_task)
